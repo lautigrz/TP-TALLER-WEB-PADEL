@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+    <title>Document</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid ">
+        <a class="navbar-brand" href="#">
+            <img src="persona.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+            Bootstrap
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse.show navbar-collapse justify-content-center" id="navbarNav">
+            <form class="d-flex" role="search" action="/tu-endpoint-de-busqueda" method="get">
+                <div class="me-2">
+                    <input class="form-control" type="text" name="nombre" placeholder="Buscar por nombre de torneo" aria-label="Nombre de torneo">
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown button
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </div>
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
+        </div>
+
+    </div>
+</nav>
+
+
+<section class="lista-torneos">
+    <div class="container">
+        <div class="row" >
+            <div class="col-md-4 mb-4" th:each="torneo : ${torneos}"> <!-- Cambia 'col-md-4' para ajustar el número de columnas -->
+                <div class="card">
+                    <img src="" class="card-img-top" alt="Torneo" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${torneo.titulo}">TORNEO ADECCO GROUP - RAFA NADAL ACADEMY (MALLORCA)</h5>
+                        <p class="card-text" th:text="${torneo.descripcion}"></p>
+                        <p class="card-text" th:text="${torneo.deporte}"><strong>Deporte:</strong></p>
+                        <p class="card-text" th:text="${torneo.fecha}"><strong>Fecha:</strong></p>
+                        <p class="card-text" th:text="${torneo.inscripcion}"><strong>Inscripciones:</strong></p>
+                        <p class="card-text" th:text="${torneo.ubicacion}"><strong>Ubicación:</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Cierra la fila después de todos los torneos -->
+    </div>
+</section>
+
+<script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
+</body>
+</html>
