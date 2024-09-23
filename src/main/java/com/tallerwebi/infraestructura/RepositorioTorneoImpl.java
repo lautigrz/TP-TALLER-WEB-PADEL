@@ -1,6 +1,5 @@
 package com.tallerwebi.infraestructura;
 
-import com.tallerwebi.dominio.RepositorioTorneo;
 import com.tallerwebi.dominio.Torneo;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,14 @@ public class RepositorioTorneoImpl implements RepositorioTorneo {
     public List<Torneo> listaDeTorneos() {
         String hql = "FROM Torneo";
         Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Torneo> buscarTorneos(String txt) {
+        String hql = "FROM Torneo WHERE titulo LIKE :titulo";
+        Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+        query.setParameter("titulo", "%" + txt + "%");
         return query.getResultList();
     }
 
