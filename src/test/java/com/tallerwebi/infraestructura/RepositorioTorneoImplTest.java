@@ -17,6 +17,7 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
 
 
 @ExtendWith(SpringExtension.class)
@@ -27,12 +28,13 @@ public class RepositorioTorneoImplTest {
     private RepositorioTorneo repositorioTorneo;
 
     @BeforeEach
-    public void init(){this.repositorioTorneo = new RepositorioTorneoImpl(this.sessionFactory);
+    public void init() {
+        this.repositorioTorneo = new RepositorioTorneoImpl(this.sessionFactory);
     }
 
     @Test
     @Transactional
-    public void dadoQueExisteUnTorneoEnLaBaseDeDatosCuandoLoGuardoLoEncuentroEnLaBaseDeDatos(){
+    public void dadoQueExisteUnTorneoEnLaBaseDeDatosCuandoLoGuardoLoEncuentroEnLaBaseDeDatos() {
 
         Torneo torneo = new Torneo();
         torneo.setTitulo("Torneo Buenos Aires");
@@ -42,7 +44,11 @@ public class RepositorioTorneoImplTest {
         torneo.setInscripcion("10/4/2024");
         torneo.setUbicacion("Buenos Aires, Moron");
 
-        this.repositorioTorneo.guardar(torneo);
+        try {
+            this.repositorioTorneo.guardar(torneo);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         Torneo torneo1 = new Torneo();
         torneo1.setTitulo("Torneo Santa Fe");
@@ -52,11 +58,15 @@ public class RepositorioTorneoImplTest {
         torneo1.setInscripcion("10/4/2024");
         torneo1.setUbicacion("Buenos Aires, Moron");
 
-        this.repositorioTorneo.guardar(torneo1);
+        try {
+            this.repositorioTorneo.guardar(torneo1);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         String hql = "FROM Torneo WHERE titulo = :titulo";
         Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
-        query.setParameter("titulo","Torneo Santa Fe");
+        query.setParameter("titulo", "Torneo Santa Fe");
 
         Torneo obtenido = (Torneo) query.getSingleResult();
 
@@ -65,7 +75,7 @@ public class RepositorioTorneoImplTest {
 
     @Test
     @Transactional
-    public void dadoQueExisteTorneosEnLaBaseDeDatosObtenerTodosLosTorneos(){
+    public void dadoQueExisteTorneosEnLaBaseDeDatosObtenerTodosLosTorneos() {
 
         Torneo torneo = new Torneo();
         torneo.setTitulo("Torneo Buenos Aires");
@@ -75,7 +85,11 @@ public class RepositorioTorneoImplTest {
         torneo.setInscripcion("10/4/2024");
         torneo.setUbicacion("Buenos Aires, Moron");
 
-        this.repositorioTorneo.guardar(torneo);
+        try {
+            this.repositorioTorneo.guardar(torneo);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         Torneo torneo1 = new Torneo();
         torneo1.setTitulo("Torneo Santa Fe");
@@ -85,11 +99,16 @@ public class RepositorioTorneoImplTest {
         torneo1.setInscripcion("10/4/2024");
         torneo1.setUbicacion("Buenos Aires, Moron");
 
-        this.repositorioTorneo.guardar(torneo1);
+        try {
+            this.repositorioTorneo.guardar(torneo1);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-        List<Torneo> esperado = Arrays.asList(torneo,torneo1);
+        List<Torneo> esperado = Arrays.asList(torneo, torneo1);
         List<Torneo> obtenido = this.repositorioTorneo.listaDeTorneos();
         assertThat(obtenido, equalTo(esperado));
     }
+
 
 }

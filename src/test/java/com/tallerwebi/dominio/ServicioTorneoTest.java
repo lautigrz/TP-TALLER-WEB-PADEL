@@ -67,5 +67,26 @@ public class ServicioTorneoTest {
         assertThat(resultado, contains(torneo, torneo1));
     }
 
+    @Test
+    public void dadoQueUnOrganizadorTieneTorneoObtenerTorneosDeOrganizador(){
+        Organizador organizador = new Organizador();
+        organizador.setNombre("Lionel");
+
+        Torneo torneo = new Torneo();
+        torneo.setOrganizador(organizador);
+        Torneo torneo1 = new Torneo();
+        torneo1.setOrganizador(organizador);
+
+        List<Torneo> torneos = Arrays.asList(torneo,torneo1);
+
+       when(this.repositorioTorneo.torneosDeOrganizador(organizador.getId())).thenReturn(torneos);
+
+        List<Torneo> resultado = this.servicioTorneo.torneosDeOrganizador(organizador.getId());
+
+        assertThat(resultado.size(), is(2));
+        assertThat(resultado.get(0).getOrganizador(), equalTo(organizador));
+        assertThat(resultado.get(1).getOrganizador(), equalTo(organizador));
+    }
+
 
 }

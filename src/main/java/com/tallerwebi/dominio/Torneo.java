@@ -1,9 +1,6 @@
 package com.tallerwebi.dominio;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -18,6 +15,8 @@ public class Torneo {
     private String fecha;
     private String inscripcion;
     private String ubicacion;
+    @ManyToOne
+    private Organizador organizador;
 
     public String getInscripcion() {
         return inscripcion;
@@ -69,6 +68,14 @@ public class Torneo {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public Organizador getOrganizador() {
+        return organizador;
+    }
+
+    public void setOrganizador(Organizador organizador) {
+        this.organizador = organizador;
     }
 
     @Override

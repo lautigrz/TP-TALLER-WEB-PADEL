@@ -18,6 +18,14 @@ public class RepositorioTorneoImpl implements RepositorioTorneo {
         this.sessionFactory = sessionFactory;
     }
 
+    @Override
+    public List<Torneo> torneosDeOrganizador(Long id) {
+        String hql = "FROM Torneo t WHERE t.organizador.id = :id ";
+        Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+        query.setParameter("id",id);
+        return query.getResultList();
+    }
+
     @Transactional
     @Override
     public List<Torneo> listaDeTorneos() {
@@ -35,7 +43,7 @@ public class RepositorioTorneoImpl implements RepositorioTorneo {
     }
 
     @Override
-    public void guardar(Torneo torneo) {
+    public void guardar(Torneo torneo) throws Exception {
         this.sessionFactory.getCurrentSession().save(torneo);
     }
 }

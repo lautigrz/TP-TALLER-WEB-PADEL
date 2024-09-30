@@ -9,33 +9,24 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid ">
+    <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img src="persona.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-            Bootstrap
+            <img src="pokebola.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-top">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse.show navbar-collapse justify-content-center" id="navbarNav">
-            <form class="d-flex" role="search" action="/tu-endpoint-de-busqueda" method="get">
-                <div class="me-2">
-                    <input class="form-control" type="text" name="nombre" placeholder="Buscar por nombre de torneo" aria-label="Nombre de torneo">
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown button
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+
+            <div class="d-flex align-items-center">
+                <p class="mb-0">Bienvenido, <span th:text="${organizador.nombre}">Organizador</span>!</p>
+            </div>
+
+            <form class="d-flex justify-content-center" style="width: 50%;" role="search" action="/tu-endpoint-de-busqueda" method="get">
+                <div class="me-1" style="width: 100%;">
+                    <input class="form-control" type="text" name="nombre" placeholder="Buscar por nombre de torneo o ubicacion" aria-label="Nombre de torneo">
                 </div>
                 <button class="btn btn-outline-success" type="submit">Buscar</button>
             </form>
+            <a th:href="@{/crear-torneo}">Crear torneo</a>
         </div>
-
     </div>
 </nav>
 
@@ -43,16 +34,16 @@
 <section class="lista-torneos">
     <div class="container">
         <div class="row" >
-            <div class="col-md-4 mb-4" th:each="torneo : ${torneos}"> <!-- Cambia 'col-md-4' para ajustar el número de columnas -->
+            <div class="col-md-4 mb-4" th:each="torneo : ${torneos}">
                 <div class="card">
                     <img src="" class="card-img-top" alt="Torneo" style="height: 200px; object-fit: cover;">
                     <div class="card-body">
-                        <h5 class="card-title" th:text="${torneo.titulo}">TORNEO ADECCO GROUP - RAFA NADAL ACADEMY (MALLORCA)</h5>
+                        <h5 class="card-title" th:text="${torneo.titulo}"></h5>
                         <p class="card-text" th:text="${torneo.descripcion}"></p>
-                        <p class="card-text" th:text="${torneo.deporte}"><strong>Deporte:</strong></p>
-                        <p class="card-text" th:text="${torneo.fecha}"><strong>Fecha:</strong></p>
-                        <p class="card-text" th:text="${torneo.inscripcion}"><strong>Inscripciones:</strong></p>
-                        <p class="card-text" th:text="${torneo.ubicacion}"><strong>Ubicación:</strong></p>
+                        <p class="card-text"><strong>Deporte:</strong> <span class="torneo-info" th:text="${torneo.deporte}"></span></p>
+                        <p class="card-text"><strong>Fecha:</strong> <span class="torneo-info" th:text="${torneo.fecha}"></span></p>
+                        <p class="card-text"><strong>Inscripciones:</strong> <span class="torneo-info" th:text="${torneo.inscripcion}"></span></p>
+                        <p class="card-text"><strong>Ubicación:</strong> <span class="torneo-info" th:text="${torneo.ubicacion}"></span></p>
                     </div>
                 </div>
             </div>
