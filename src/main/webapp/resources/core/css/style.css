@@ -82,3 +82,22 @@
 .incrip{
     font-weight: 500;
 }
+.custom-link {
+    text-decoration: none; /* Elimina el subrayado */
+    font-weight: bold; /* Aumenta el grosor de la letra */
+    font-size: 0.9em; /* Aumenta el tamaño de la letra (ajusta según sea necesario) */
+}
+
+.custom-link:hover {
+    color: #f8f9fa; /* Cambia el color al pasar el mouse (opcional) */
+    background-color: rgba(255, 255, 255, 0.1); /* Cambia el color de fondo al pasar el mouse (opcional) */
+}
+.card-text {
+    white-space: nowrap;
+    overflow: hidden; /* Oculta el texto que excede la altura máxima */
+    text-overflow: ellipsis;
+}
+/* Cambiar la duración de la transición del Offcanvas */
+.offcanvas {
+    transition: transform 0.4s  linear; /* Cambiar la duración (0.8s) y la función de aceleración */
+}

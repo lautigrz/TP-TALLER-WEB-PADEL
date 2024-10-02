@@ -7,8 +7,37 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg bg-dark p-4">
+    <div class="container-fluid">
+        <!-- Flecha a la izquierda -->
+        <div class="d-flex align-items-center">
+            <a href="#" class="text-white">
+                <i class="fas fa-arrow-left" style="font-size: 1.5rem;"></i> <!-- Icono de flecha -->
+            </a>
+        </div>
+
+        <!-- Texto centrado "Nuevo torneo" -->
+        <div class="text-center" style="width:400px;">
+            <h5 class="text-white" style=" font-size: 1.5em;">Nuevo torneo</h5>
+        </div>
+
+        <!-- Ícono redondo de usuario con menú desplegable -->
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user-circle" style="font-size: 2rem;"></i>
+                <span class="ms-2">Usuario</span> <!-- Agrega la clase ms-2 para el margen -->
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
+                <li><a class="dropdown-item" href="#">Perfil</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container mt-5">
-    <h2>Registrar Torneo</h2>
+
     <form th:action="@{/registrar-torneo}" method="post" th:object="${torneo}">
         <div class="form-group">
             <label for="titulo">Título:</label>
@@ -23,19 +52,35 @@
             <input type="text" class="form-control" th:field="*{deporte}" id="deporte" placeholder="Ingrese el deporte" required>
         </div>
         <div class="form-group">
-            <label for="fecha">Fecha:</label>
-            <input type="date" class="form-control" th:field="*{fecha}" id="fecha" required>
+            <label for="fechaInicio">Fecha inicio:</label>
+            <input type="date" class="form-control" th:field="*{fechaInicio}" id="fechaInicio" required>
         </div>
         <div class="form-group">
-            <label for="inscripcion">Fecha de Inscripción:</label>
-            <input type="date" class="form-control" th:field="*{inscripcion}" id="inscripcion" required>
+            <label for="fechaFin">Fecha fin:</label>
+            <input type="date" class="form-control" th:field="*{fechaFin}" id="fechaFin" required>
+        </div>
+        <div class="form-group">
+            <label for="inscripcionInicia">Inicio de Inscripción:</label>
+            <input type="date" class="form-control" th:field="*{inscripcionInicia}" id="inscripcionInicia" required>
+        </div>
+        <div class="form-group">
+            <label for="inscripcionFin">Fin de Inscripción:</label>
+            <input type="date" class="form-control" th:field="*{inscripcionFin}" id="inscripcionFin" required>
+        </div>
+        <div class="form-group">
+            <label for="desde">Desde:</label>
+            <input type="time" class="form-control" th:field="*{horarioDesde}" id="desde" required>
+        </div>
+        <div class="form-group">
+            <label for="hasta">Hasta:</label>
+            <input type="time" class="form-control" th:field="*{horarioHasta}" id="hasta" required>
         </div>
         <div class="form-group">
             <label for="ubicacion">Ubicación:</label>
             <input type="text" class="form-control" th:field="*{ubicacion}" id="ubicacion" placeholder="Ingrese la ubicación" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Registrar Torneo</button>
+        <button type="submit" class="btn btn-primary mt-3">Registrar Torneo</button>
     </form>
 </div>
 </body>

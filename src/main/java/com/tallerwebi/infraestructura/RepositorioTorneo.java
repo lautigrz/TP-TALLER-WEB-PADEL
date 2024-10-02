@@ -8,5 +8,6 @@ public interface RepositorioTorneo {
     List<Torneo> torneosDeOrganizador(Long id);
     List<Torneo> listaDeTorneos();
     List<Torneo> buscarTorneos(String txt);
-    void guardar(Torneo torneo) throws Exception;
+    Torneo obtenerTorneo(Long id);
+    void guardar(Torneo torneo);
 }

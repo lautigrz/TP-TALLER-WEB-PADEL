@@ -10,24 +10,29 @@ public class Torneo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titulo;
+    @Column(length = 1000)
     private String descripcion;
     private String deporte;
-    private String fecha;
-    private String inscripcion;
+    private String fechaInicio;
+    private String fechaFin;
+    private String inscripcionInicia;
+    private String inscripcionFin;
+    private String horarioDesde;
+    private String horarioHasta;
     private String ubicacion;
     @ManyToOne
     private Organizador organizador;
 
-    public String getInscripcion() {
-        return inscripcion;
+    public String getInscripcionInicia() {
+        return inscripcionInicia;
     }
 
     public String getUbicacion() {
         return ubicacion;
     }
 
-    public String getFecha() {
-        return fecha;
+    public String getFechaInicio() {
+        return fechaInicio;
     }
 
     public String getDeporte() {
@@ -47,15 +52,15 @@ public class Torneo {
     }
 
     public void setInscripcion(String inscripcion) {
-        this.inscripcion = inscripcion;
+        this.inscripcionInicia = inscripcion;
     }
 
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setFechaInicio(String fecha) {
+        this.fechaInicio = fecha;
     }
 
     public void setDeporte(String deporte) {
@@ -70,12 +75,48 @@ public class Torneo {
         this.titulo = titulo;
     }
 
+    public String getHorarioDesde() {
+        return horarioDesde;
+    }
+
+    public void setHorarioDesde(String horarioTorneo) {
+        this.horarioDesde = horarioTorneo;
+    }
+
+    public String getInscripcionFin() {
+        return inscripcionFin;
+    }
+
+    public void setInscripcionFin(String inscripcionFin) {
+        this.inscripcionFin = inscripcionFin;
+    }
+
+    public void setInscripcionInicia(String inscripcionInicia) {
+        this.inscripcionInicia = inscripcionInicia;
+    }
+
+    public String getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(String fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
     public Organizador getOrganizador() {
         return organizador;
     }
 
     public void setOrganizador(Organizador organizador) {
         this.organizador = organizador;
+    }
+
+    public String getHorarioHasta() {
+        return horarioHasta;
+    }
+
+    public void setHorarioHasta(String horarioHasta) {
+        this.horarioHasta = horarioHasta;
     }
 
     @Override

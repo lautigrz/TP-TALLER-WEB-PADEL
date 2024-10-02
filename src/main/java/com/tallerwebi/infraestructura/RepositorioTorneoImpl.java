@@ -43,7 +43,15 @@ public class RepositorioTorneoImpl implements RepositorioTorneo {
     }
 
     @Override
-    public void guardar(Torneo torneo) throws Exception {
+    public Torneo obtenerTorneo(Long id) {
+        String hql = "FROM Torneo WHERE id = :id";
+        Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+        query.setParameter("id", id);
+        return (Torneo) query.getResultList().get(0);
+    }
+
+    @Override
+    public void guardar(Torneo torneo) {
         this.sessionFactory.getCurrentSession().save(torneo);
     }
 }

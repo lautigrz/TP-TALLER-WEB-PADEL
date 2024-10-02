@@ -5,30 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Document</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg bg-dark p-4">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="pokebola.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-top">
-        </a>
-        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
 
+
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <!-- Texto de bienvenida -->
             <div class="d-flex align-items-center">
-                <p class="mb-0">Bienvenido, <span th:text="${organizador.nombre}">Organizador</span>!</p>
+                <p class="mb-0 text-white">Bienvenido, <span th:text="${organizador.nombre}">Organizador</span>!</p>
             </div>
 
-            <form class="d-flex justify-content-center" style="width: 50%;" role="search" action="/tu-endpoint-de-busqueda" method="get">
-                <div class="me-1" style="width: 100%;">
-                    <input class="form-control" type="text" name="nombre" placeholder="Buscar por nombre de torneo o ubicacion" aria-label="Nombre de torneo">
-                </div>
-                <button class="btn btn-outline-success" type="submit">Buscar</button>
-            </form>
-            <a th:href="@{/crear-torneo}">Crear torneo</a>
+            <!-- Texto centrado "Mis torneos" -->
+
+            <div class="text-center"  style="width:300px;">
+                <h5 class="text-white" style="margin-right:100px;">Mis torneos</h5>
+            </div>
+            <!-- Botón para abrir el Offcanvas -->
+            <button class="btn btn-primary bg-dark border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                <i class="fas fa-bars" style="font-size: 1.5rem;"></i> <!-- Aquí puedes cambiar 'fa-bars' por otro ícono -->
+            </button>
+
         </div>
     </div>
 </nav>
+
+
+<!-- Offcanvas -->
+<div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title text-white" id="offcanvasRightLabel">Gestion</h5>
+        <button type="button" class="btn-close bg-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body text-left"> <!-- Añadir clase 'text-center' -->
+        <div class="mb-4 d-flex align-items-center justify-content-center"> <!-- Flex para alinear -->
+            <i class="fas fa-user-circle text-white" style="font-size: 3rem;"></i> <!-- Icono de usuario grande -->
+            <span class="text-white ms-2" style="font-size: 1rem;" th:text="${organizador.nombre}"> </span>
+            <span class="text-white ms-1" style="font-size: 1rem;" th:text="${organizador.apellido}"></span>  <!-- Nombre al lado del icono -->
+        </div>
+        <ul class="list-group"> <!-- Usa 'list-group' para estilizar la lista -->
+            <li class="list-group-item bg-dark">
+                <a class="text-white custom-link" href="#">Perfil</a>
+            </li>
+            <li class="list-group-item bg-dark">
+                <a class="text-white custom-link" th:href="@{/crear-torneo}">Crear torneo</a>
+            </li>
+            <li class="list-group-item bg-dark">
+                <a class="text-white custom-link" href="#">Cerrar sesión</a>
+            </li>
+        </ul>
+    </div>
+</div>
 
 
 <section class="lista-torneos">
@@ -36,14 +66,18 @@
         <div class="row" >
             <div class="col-md-4 mb-4" th:each="torneo : ${torneos}">
                 <div class="card">
-                    <img src="" class="card-img-top" alt="Torneo" style="height: 200px; object-fit: cover;">
+                    <a th:href="@{/vista-torneo/{id}(id=${torneo.id})}">
+                        <img src="https://th.bing.com/th/id/R.565964420be6fb043fbe1743a4b8b8d1?rik=%2bpAreFg6Q1cOlA&pid=ImgRaw&r=0" class="card-img-top" alt="Torneo" style="height: 200px; object-fit: cover;">
+                    </a>
+
                     <div class="card-body">
                         <h5 class="card-title" th:text="${torneo.titulo}"></h5>
                         <p class="card-text" th:text="${torneo.descripcion}"></p>
                         <p class="card-text"><strong>Deporte:</strong> <span class="torneo-info" th:text="${torneo.deporte}"></span></p>
-                        <p class="card-text"><strong>Fecha:</strong> <span class="torneo-info" th:text="${torneo.fecha}"></span></p>
-                        <p class="card-text"><strong>Inscripciones:</strong> <span class="torneo-info" th:text="${torneo.inscripcion}"></span></p>
+                        <p class="card-text"><strong>Fecha:</strong> <span class="torneo-info" th:text="${torneo.fechaInicio}"></span></p>
+                        <p class="card-text"><strong>Fecha de inscripcion:</strong> <span class="torneo-info" th:text="${torneo.inscripcionInicia}"></span></p>
                         <p class="card-text"><strong>Ubicación:</strong> <span class="torneo-info" th:text="${torneo.ubicacion}"></span></p>
+
                     </div>
                 </div>
             </div>

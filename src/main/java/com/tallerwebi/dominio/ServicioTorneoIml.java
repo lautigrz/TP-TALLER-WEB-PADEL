@@ -42,5 +42,10 @@ public class ServicioTorneoIml implements ServicioTorneo{
         return this.repositorioTorneo.buscarTorneos(txt);
     }
 
+    @Override
+    public Torneo obtenerTorneo(Long id) {
+        return this.repositorioTorneo.obtenerTorneo(id);
+    }
+
 
 }

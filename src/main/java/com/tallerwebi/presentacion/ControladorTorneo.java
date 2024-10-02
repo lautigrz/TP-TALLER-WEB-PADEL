@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -45,8 +42,6 @@ public class ControladorTorneo {
             return "nuevo-torneo";
 
     }
-
-
     @PostMapping("/registrar-torneo")
     public String registrarTorneo(@ModelAttribute("torneo") Torneo torneo, HttpSession session) {
         Organizador organizador = (Organizador) session.getAttribute("organizadorLogueado");
@@ -55,6 +50,11 @@ public class ControladorTorneo {
             return "redirect:/torneo";
 
     }
-
+    @GetMapping("/vista-torneo/{id}")
+    public String verTorneo(@PathVariable Long id, Model model) {
+        Torneo torneo = servicioTorneo.obtenerTorneo(id); // Método que busca el torneo por ID
+        model.addAttribute("torneo", torneo);
+        return "torneo-organizador"; // Nombre del archivo Thymeleaf sin extensión
+    }
 }
 

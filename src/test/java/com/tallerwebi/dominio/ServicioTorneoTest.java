@@ -11,9 +11,8 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.hamcrest.Matchers.empty;
+import static org.mockito.Mockito.*;
 
 public class ServicioTorneoTest {
     private ServicioTorneo servicioTorneo;
@@ -23,6 +22,16 @@ public class ServicioTorneoTest {
     public void init(){
         repositorioTorneo = mock(RepositorioTorneo.class);
         this.servicioTorneo = new ServicioTorneoIml(repositorioTorneo);
+    }
+
+    @Test
+    public void queSePuedaGuardarUnTorneo(){
+        Torneo torneo = new Torneo();
+        torneo.setTitulo("Torneo Buenos Aires");
+
+        this.servicioTorneo.guardarTorneo(torneo);
+
+        verify(repositorioTorneo).guardar(torneo);
     }
 
     @Test
@@ -86,6 +95,26 @@ public class ServicioTorneoTest {
         assertThat(resultado.size(), is(2));
         assertThat(resultado.get(0).getOrganizador(), equalTo(organizador));
         assertThat(resultado.get(1).getOrganizador(), equalTo(organizador));
+    }
+
+    @Test
+    public void dadoQueUnOrganizadorTieneTorneoObtenerTorneoPorId(){
+        Organizador organizador = new Organizador();
+        organizador.setNombre("Lionel");
+
+        Torneo torneo = new Torneo();
+        torneo.setOrganizador(organizador);
+        Torneo torneo1 = new Torneo();
+        torneo1.setOrganizador(organizador);
+
+        List<Torneo> torneos = Arrays.asList(torneo,torneo1);
+
+        when(this.repositorioTorneo.obtenerTorneo(torneo.getId())).thenReturn(torneo);
+
+        Torneo resultado = this.servicioTorneo.obtenerTorneo(torneo.getId());
+
+        assertThat(resultado.getOrganizador(), equalTo(organizador));
+        assertThat(resultado, equalTo(torneo));
     }
 
 
