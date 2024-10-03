@@ -30,8 +30,6 @@ public class ControladorTorneo {
         if (organizadorLogueado != null) {
             modelo.put("organizador", organizadorLogueado);
         }
-
-
         return new ModelAndView("torneo", modelo);
     }
     @GetMapping("/crear-torneo")
@@ -43,18 +41,27 @@ public class ControladorTorneo {
 
     }
     @PostMapping("/registrar-torneo")
-    public String registrarTorneo(@ModelAttribute("torneo") Torneo torneo, HttpSession session) {
-        Organizador organizador = (Organizador) session.getAttribute("organizadorLogueado");
-        torneo.setOrganizador(organizador);
-        servicioTorneo.guardarTorneo(torneo);
-            return "redirect:/torneo";
+    public ModelAndView registrarTorneo(@ModelAttribute("torneo") Torneo torneo, HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            Organizador organizador = (Organizador) session.getAttribute("organizadorLogueado");
+            torneo.setOrganizador(organizador);
+            servicioTorneo.guardarTorneo(torneo);
 
+            modelAndView.setViewName("redirect:/torneo");
+        } catch (IllegalArgumentException ex) {
+
+            modelAndView.setViewName("nuevo-torneo");
+            modelAndView.addObject("error", ex.getMessage());
+        }
+
+        return modelAndView;
     }
     @GetMapping("/vista-torneo/{id}")
     public String verTorneo(@PathVariable Long id, Model model) {
         Torneo torneo = servicioTorneo.obtenerTorneo(id); // Método que busca el torneo por ID
         model.addAttribute("torneo", torneo);
-        return "torneo-organizador"; // Nombre del archivo Thymeleaf sin extensión
+        return "torneo-organizador";
     }
 }
 
