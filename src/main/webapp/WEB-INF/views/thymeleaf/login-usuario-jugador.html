@@ -17,7 +17,7 @@
 <div class="login">
     <h1>Login</h1>
 
-    <form th:action="@{/iniciar-session}" method="post" th:object="${organizador}">
+    <form th:action="@{/iniciar-sesion-usuario-jugador}" method="post" th:object="${usuarioJugador}">
         <div th:if="${error}" class="alert alert-danger" role="alert" style="font-size: 0.8em; padding: 10px;">
             <p th:text="${error}" style="margin: 0;"></p>
         </div>
@@ -26,7 +26,7 @@
         <input type="password" th:field="*{password}" placeholder="Contraseña" required="required" />
         <button type="submit" class="boton">Iniciar session</button>
     </form>
-    <a style="color:white" th:href="@{/formulario-organizador}">Registrarme</a>
+    <a style="color:white" th:href="@{/formulario-usuario-jugador}">Registrarme como Jugador</a>
 
 </div>
 <script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>

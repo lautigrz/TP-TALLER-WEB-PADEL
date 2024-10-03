@@ -3,6 +3,7 @@ package com.tallerwebi.presentacion;
 import com.tallerwebi.dominio.Organizador;
 import com.tallerwebi.dominio.ServicioTorneo;
 import com.tallerwebi.dominio.Torneo;
+import com.tallerwebi.dominio.UsuarioJugador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +35,22 @@ public class ControladorTorneo {
 
         return new ModelAndView("torneo", modelo);
     }
+
+    @RequestMapping("/torneo-usuario-jugador")
+    public ModelAndView torneosDeUsuarios(HttpSession session) {
+        ModelMap modelo = new ModelMap();
+
+        UsuarioJugador usuarioJugadorLogueado = (UsuarioJugador) session.getAttribute("usuarioJugadorLogueado");
+        modelo.put("torneos", this.servicioTorneo.verTorneosDisponibles());
+        if (usuarioJugadorLogueado != null) {
+            modelo.put("usuarioJugador", usuarioJugadorLogueado);
+        }
+
+
+        return new ModelAndView("torneo-usuario-jugador", modelo);
+    }
+
+
     @GetMapping("/crear-torneo")
     public String mostrarFormularioRegistroTorneo(Model model, HttpSession session) {
             Torneo torneo = new Torneo();

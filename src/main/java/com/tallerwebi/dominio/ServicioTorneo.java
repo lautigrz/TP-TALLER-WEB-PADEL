@@ -10,4 +10,5 @@ public interface ServicioTorneo {
     List<Torneo> buscarTorneo(String txt);
     Torneo obtenerTorneo(Long id);
 
+    List<Torneo> verTorneosDisponibles();
 }

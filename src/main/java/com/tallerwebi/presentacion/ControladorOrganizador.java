@@ -29,6 +29,7 @@ public class ControladorOrganizador {
         model.addAttribute("organizador", new Organizador());
         return "registro";
     }
+
     @GetMapping("/login")
     public String mostrarFormularioInicio(Model model) {
         model.addAttribute("organizador", new Organizador());
@@ -47,6 +48,7 @@ public class ControladorOrganizador {
     }
     @PostMapping("/iniciar-session")
     public String iniciarSession(@ModelAttribute("organizador") Organizador organizador, HttpServletRequest httpServletRequest){
+
         Organizador organizadorExistente = this.servicioOrganizador.iniciarSesion(organizador.getCorreoElectronico(), organizador.getPassword());
 
         if (organizadorExistente != null) {
@@ -56,7 +58,6 @@ public class ControladorOrganizador {
         }
             // Lanzar la excepción si el usuario no es válido
             throw new UsuarioException("Correo electronico o Contraseña invalida");
-
 
     }
 }

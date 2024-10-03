@@ -9,6 +9,8 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.*;
 
 public class ServicioOrganizadorTest {
+
+
     private ServicioOrganizador servicioOrganizador;
     private RepositorioOrganizador repositorioOrganizador;
 

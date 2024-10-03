@@ -47,5 +47,10 @@ public class ServicioTorneoIml implements ServicioTorneo{
         return this.repositorioTorneo.obtenerTorneo(id);
     }
 
+    @Override
+    public List<Torneo> verTorneosDisponibles() {
+        return this.repositorioTorneo.verTorneosDisponibles();
+    }
+
 
 }

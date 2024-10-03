@@ -10,4 +10,6 @@ public interface RepositorioTorneo {
     List<Torneo> buscarTorneos(String txt);
     Torneo obtenerTorneo(Long id);
     void guardar(Torneo torneo);
+
+    List<Torneo> verTorneosDisponibles();
 }

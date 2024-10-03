@@ -15,20 +15,24 @@
 </head>
 
 <body>
-<!--
+
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="#">UNLAM</a>
+  <a class="navbar-brand" href="#">Torneo Padel Webapp</a>
 </nav>
 
 <main role="main" class="container">
   <div class = "container">
-    <h1>Bienvenidos a Taller Web 1</h1>
+    <h1>Bienvenidos a Padel-ya</h1>
 
-    <a href="login.html" class="btn btn-lg btn-primary btn-block">Volver</a>
+    <a class="btn btn-primary" th:href="@{/formulario-organizador}">Registrarme como Administrador</a>
+    <a class="btn btn-danger" th:href="@{/login}">Login Administrador</a>
+    <a class="btn btn-secondary" th:href="@{/formulario-usuario-jugador}">Registrarme como Jugador</a>
+    <a class="btn btn-danger" th:href="@{/login-usuario-jugador}">Login Jugador</a>
+
   </div>
 </main>
 
 <script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
--->
+
 </body>
 </html>

@@ -54,4 +54,11 @@ public class RepositorioTorneoImpl implements RepositorioTorneo {
     public void guardar(Torneo torneo) {
         this.sessionFactory.getCurrentSession().save(torneo);
     }
+
+    @Override
+    public List<Torneo> verTorneosDisponibles() {
+        String hql = "FROM Torneo";
+        Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+        return query.getResultList();
+    }
 }
