@@ -5,6 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Torneo</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+
+    <style>
+
+        #suggestions {
+            border: 1px solid #d4d4d4;
+            max-height: 150px;
+            overflow-y: auto;
+            position: absolute;
+            background-color: white;
+            width: 300px;
+            z-index: 1000;
+        }
+        #suggestions div {
+            padding: 10px;
+            cursor: pointer;
+        }
+        #suggestions div:hover {
+            background-color: #e9e9e9;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-dark p-4">
@@ -79,13 +99,13 @@
         </div>
         <div class="form-group">
             <label for="ubicacion">Ubicación:</label>
-            <input type="text" class="form-control" th:field="*{ubicacion}" id="ubicacion" placeholder="Ingrese la ubicación"required>
-
+            <input type="text" class="form-control" th:field="*{ubicacion}" id="ubicacion" placeholder="Ingrese la ubicación" oninput="searchPlaces()" required>
+            <div id="suggestions"></div>
         </div>
 
         <button type="submit" class="btn btn-primary mt-3">Registrar Torneo</button>
     </form>
 </div>
-
+<script th:src="@{/js/autocompletado.js}"></script>
 </body>
 </html>
